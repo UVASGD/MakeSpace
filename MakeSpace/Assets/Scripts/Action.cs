@@ -19,10 +19,15 @@ public class Action : MonoBehaviour, IComparable<Action>
         
     }
 
-    public int CompareTo(Action o)
+    public int CompareTo(Action other)
     {
         if (this.priority < other.priority) return -1;
         else if (this.priority > other.priority) return 1;
         else return 0;
+    }
+
+    public virtual bool Resolve()
+    {
+        return true;
     }
 }
