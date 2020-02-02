@@ -18,7 +18,37 @@ public static class Utils
             list[n] = value;
         }
     }
-}
+
+
+        /*
+        public static T Choose<T>(Dictionary<T, float> probs)
+        {
+
+            Dictionary<int, T> 
+            float total = 0;
+
+            foreach (float elem in probs.Keys)
+            {
+                total += elem;
+            }
+
+            float randomPoint = Random.value * total;
+
+            for (int i = 0; i < probs.Keys.Count; i++)
+            {
+                if (randomPoint < probs[i])
+                {
+                    return i;
+                }
+                else
+                {
+                    randomPoint -= probs[i];
+                }
+            }
+            return probs.Length - 1;
+        }
+        */
+    }
 
 public static class DirectionTransform
 {
@@ -42,5 +72,32 @@ public static class DirectionTransform
     public static Direction Reverse(Direction dir)
     {
         return trans_to_dir[-dir_to_trans[dir]];
+    }
+
+    public static Dictionary<Direction, Orientation> dir_to_orient = new Dictionary<Direction, Orientation>()
+    {
+        {Direction.North, Orientation.Horizontal },
+        {Direction.South, Orientation.Horizontal },
+        {Direction.East, Orientation.Vertical },
+        {Direction.West, Orientation.Vertical }
+    };
+}
+
+public static class TransformDeepChildExtension
+{
+    //Breadth-first search
+    public static Transform FindDeepChild(this Transform aParent, string aName)
+    {
+        Queue<Transform> queue = new Queue<Transform>();
+        queue.Enqueue(aParent);
+        while (queue.Count > 0)
+        {
+            var c = queue.Dequeue();
+            if (c.name == aName)
+                return c;
+            foreach (Transform t in c)
+                queue.Enqueue(t);
+        }
+        return null;
     }
 }

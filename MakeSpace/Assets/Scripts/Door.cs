@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public enum Orientation { Horizontal, Vertical }
-
-public class Wall : MonoBehaviour
+public class Door : Wall
 {
-    public Orientation orientation;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +15,4 @@ public class Wall : MonoBehaviour
     {
         
     }
-
-       
 }
